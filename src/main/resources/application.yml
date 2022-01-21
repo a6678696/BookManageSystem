@@ -15,9 +15,12 @@ spring:
     url: jdbc:mysql://localhost:3306/db_bookmanagesystem?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: 123456
-  jpa:
-    hibernate:
-      ddl-auto: update
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #配置后可以通过@Column注解的name属性自定义数据库的字段名称
-    show-sql: true
+
+#mybatis的相关配置
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.ledao.entity
+  #开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true

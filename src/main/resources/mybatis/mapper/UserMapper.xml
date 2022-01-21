@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ledao.mapper.UserMapper">
+    <resultMap id="UseResult" type="User">
+        <result property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="nickName" column="nickName"/>
+        <result property="password" column="password"/>
+        <result property="type" column="type"/>
+        <result property="state" column="state"/>
+        <result property="isBorrow" column="isBorrow"/>
+    </resultMap>
+
+    <select id="list" parameterType="map" resultMap="UseResult">
+        select *
+        from t_user
+        <where>
+            <if test="userName != null and userName != ''">
+                and userName like #{userName}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="isBorrow != null">
+                and isBorrow = #{isBorrow}
+            </if>
+        </where>
+        <if test="start != null and size != null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="java.lang.Long">
+        select count(*)
+        from t_user
+        <where>
+            <if test="userName != null and userName != ''">
+                and userName like #{userName}
+            </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="isBorrow != null">
+                and isBorrow = #{isBorrow}
+            </if>
+        </where>
+    </select>
+
+    <insert id="add" parameterType="User">
+        insert into t_user (isBorrow, password, state, type, userName, nickName)
+        values (1, #{password}, 1, 2, #{userName}, #{userName});
+    </insert>
+
+    <update id="update" parameterType="User">
+        update t_user
+        <set>
+            <if test="userName != null and userName != ''">
+                userName=#{userName},
+            </if>
+            <if test="password != null and password != ''">
+                password=#{password},
+            </if>
+            <if test="state != null">
+                state=#{state},
+            </if>
+            <if test="isBorrow != null">
+                isBorrow=#{isBorrow},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="findByUserName" parameterType="string" resultType="com.ledao.entity.User">
+        select * from t_user where userName=#{userName}
+    </select>
+
+    <select id="findById" parameterType="integer" resultType="com.ledao.entity.User">
+        select * from t_user where id=#{id}
+    </select>
+</mapper>
