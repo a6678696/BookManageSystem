@@ -192,118 +192,30 @@
     background: url('usericons/plugin.gif') no-repeat center center;
 }
 
-.icon-writeBlog {
-    background: url('usericons/writeBlog.gif') no-repeat center center;
-}
-
-.icon-blogTypeManage {
-    background: url('usericons/blogTypeManage.gif') no-repeat center center;
-}
-
-.icon-blogManage {
-    background: url('usericons/blogManage.gif') no-repeat center center;
-}
-
-.icon-interviewRecordManage {
-    background: url('usericons/interviewRecordManege.gif') no-repeat center center;
-}
-
-.icon-linkManage {
-    background: url('usericons/linkManage.gif') no-repeat center center;
-}
-
-.icon-commentManage {
-    background: url('usericons/commentManage.gif') no-repeat center center;
-}
-
-.icon-likeManage {
-    background: url('usericons/likeManage.gif') no-repeat center center;
-}
-
-.icon-ipBanManage {
-    background: url('usericons/ipBanManage.gif') no-repeat center center;
-}
-
-.icon-backup {
-    background: url('usericons/backup.gif') no-repeat center center;
-}
-
-.icon-changeSkin {
-    background: url('usericons/changeSkin.gif') no-repeat center center;
-}
-
-.icon-sendMail {
-    background: url('usericons/sendMail.gif') no-repeat center center;
-}
-
 .icon-exit {
     background: url('usericons/exit.gif') no-repeat center center;
-}
-
-.icon-setMenuBlog {
-    background: url('usericons/setMenuBlog.gif') no-repeat center center;
-}
-
-.icon-changeCodeStyle {
-    background: url('usericons/codeStyle.gif') no-repeat center center;
-}
-
-.icon-countIpNumByDay {
-    background: url('usericons/countIpNumByDay.gif') no-repeat center center;
-}
-
-.icon-countInterviewNumByDay {
-    background: url('usericons/icon-countInterviewNumByDay.gif') no-repeat center center;
-}
-
-.icon-redis {
-    background: url('usericons/redis.gif') no-repeat center center;
 }
 
 .icon-userManage {
     background: url('usericons/icon-userManage.gif') no-repeat center center;
 }
 
-.icon-goodsAdd {
-    background: url('usericons/goodsAdd.gif') no-repeat center center;
-}
-
 .icon-banUser {
     background: url('usericons/banUser.gif') no-repeat center center;
 }
 
-.icon-contactInformationManage {
-    background: url('usericons/contactInformationManage.gif') no-repeat center center;
+.icon-bookManage {
+    background: url('usericons/bookManage.gif') no-repeat center center;
 }
 
-.icon-contactManage {
-    background: url('usericons/contactManage.gif') no-repeat center center;
+.icon-bookTypeManage {
+    background: url('usericons/bookTypeManage.gif') no-repeat center center;
 }
 
-.icon-carouselManage {
-    background: url('usericons/carouselManage.gif') no-repeat center center;
+.icon-borrowRecord {
+    background: url('usericons/borrowRecord.gif') no-repeat center center;
 }
 
-.icon-announcementManage {
-    background: url('usericons/announcementManage.gif') no-repeat center center;
-}
-
-.icon-goodsTypeManage {
-    background: url('usericons/goodsTypeManage.gif') no-repeat center center;
-}
-
-.icon-goodsManage {
-    background: url('usericons/goodsManage.gif') no-repeat center center;
-}
-
-.icon-payRecordManage {
-    background: url('usericons/payRecordManage.gif') no-repeat center center;
-}
-
-.icon-messageManage {
-    background: url('usericons/messageManage.gif') no-repeat center center;
-}
-
-.icon-recommendGoods {
-    background: url('usericons/recommendGoods.gif') no-repeat center center;
+.icon-modifyIsBorrow {
+    background: url('usericons/modifyIsBorrow.gif') no-repeat center center;
 }

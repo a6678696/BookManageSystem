@@ -78,10 +78,20 @@
     </update>
 
     <select id="findByUserName" parameterType="string" resultType="com.ledao.entity.User">
-        select * from t_user where userName=#{userName}
+        select *
+        from t_user
+        where userName = #{userName}
     </select>
 
     <select id="findById" parameterType="integer" resultType="com.ledao.entity.User">
-        select * from t_user where id=#{id}
+        select *
+        from t_user
+        where id = #{id}
     </select>
+
+    <delete id="deleteById" parameterType="integer">
+        delete
+        from t_user
+        where id = #{id}
+    </delete>
 </mapper>

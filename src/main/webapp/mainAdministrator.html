@@ -31,8 +31,10 @@
                         var type = result.currentUser.type;
                         if (type === 1) {
                             $("#currentUserType").html("管理员");
-                        } else if (type === 2){
+                        } else if (type === 2) {
                             window.location.href = "/mainGeneralUser.html";
+                        } else {
+                            window.location.href = "/login.html";
                         }
                     } else {
                         window.location.href = "/login.html";
@@ -120,7 +122,7 @@
         function logout() {
             $.messager.confirm("系统提示", "您确定要退出系统吗?", function (r) {
                 if (r) {
-                    window.location.href = "/logout";
+                    window.location.href = "/user/logout";
                 }
             });
         }
@@ -168,26 +170,18 @@
 
 <div region="west" style="width: 200px" title="导航菜单" split="true">
     <div style="padding-top: 10px;padding-left: 10px;">
-        <a href="javascript:openTab('用户管理','userManage.html','icon-userManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-userManage'" style="width: 150px;">用户管理</a>
-        <a href="javascript:openTab('商品类别管理','goodsTypeManage.html','icon-goodsTypeManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-goodsTypeManage'" style="width: 150px;">商品类别管理</a>
-        <a href="javascript:openTab('商品管理','goodsManage.html','icon-goodsManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-goodsManage'" style="width: 150px;">商品管理</a>
-        <a href="javascript:openTab('用户联系方式管理','contactInformationManage.html','icon-contactInformationManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-contactInformationManage'" style="width: 150px;">用户联系方式管理</a>
-        <a href="javascript:openTab('用户留言管理','contactManage.html','icon-contactManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-contactManage'" style="width: 150px;">用户留言管理</a>
-        <a href="javascript:openTab('轮播图管理','carouselManage.html','icon-carouselManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-carouselManage'" style="width: 150px;">轮播图管理</a>
-        <a href="javascript:openTab('公告管理','announcementManage.html','icon-announcementManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-announcementManage'" style="width: 150px;">公告管理</a>
-        <a href="javascript:openTab('预订记录管理','reserveRecordManage.html','icon-payRecordManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-payRecordManage'" style="width: 150px;">预订记录管理</a>
-        <a href="javascript:openTab('用户消息管理','messageManage.html','icon-messageManage')" class="easyui-linkbutton"
-           data-options="plain:true,iconCls:'icon-messageManage'" style="width: 150px;">用户消息管理</a>
-        <a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'"
-           style="width: 150px;float: left">安全退出</a>
+        <div style="padding-top: 10px;padding-left: 10px;">
+            <a href="javascript:openTab('用户管理','userManage.html','icon-userManage')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-userManage'" style="width: 150px;">用户管理</a>
+            <a href="javascript:openTab('图书类别管理','bookTypeManage.html','icon-bookTypeManage')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-bookTypeManage'" style="width: 150px;">图书类别管理</a>
+            <a href="javascript:openTab('图书管理','bookManage.html','icon-bookManage')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-bookManage'" style="width: 150px;">图书管理</a>
+            <a href="javascript:openTab('图书管理','borrowRecord.html','icon-borrowRecord')" class="easyui-linkbutton"
+               data-options="plain:true,iconCls:'icon-borrowRecord'" style="width: 150px;">借阅记录管理</a>
+            <a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'"
+               style="width: 150px;float: left">安全退出</a>
+        </div>
     </div>
 </div>
 <div id="menu" class="easyui-menu">
