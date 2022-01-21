@@ -219,3 +219,7 @@
 .icon-modifyIsBorrow {
     background: url('usericons/modifyIsBorrow.gif') no-repeat center center;
 }
+
+.icon-borrowBook {
+    background: url('usericons/borrowBook.gif') no-repeat center center;
+}
