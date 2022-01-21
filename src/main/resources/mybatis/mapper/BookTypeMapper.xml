@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ledao.mapper.BookTypeMapper">
+    <resultMap id="BookTypeResult" type="BookType">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="list" parameterType="map" resultMap="BookTypeResult">
+        select *
+        from t_book_type
+        <where>
+            <if test="name != null and name != ''">
+                and name like #{name}
+            </if>
+        </where>
+        <if test="start != null and size != null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="getCount" parameterType="map" resultType="java.lang.Long">
+        select count(*)
+        from t_book_type
+        <where>
+            <if test="name != null and name != ''">
+                and name like #{name}
+            </if>
+        </where>
+    </select>
+    
+    <insert id="add" parameterType="BookType">
+        insert into t_book_type (name)
+        values (#{name});
+    </insert>
+
+    <update id="update" parameterType="BookType">
+        update t_book_type
+        <set>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="findById" parameterType="integer" resultType="com.ledao.entity.BookType">
+        select * from t_book_type where id=#{id}
+    </select>
+
+    <delete id="deleteById" parameterType="integer">
+        delete from t_book_type where id=#{id}
+    </delete>
+
+    <select id="findByName" parameterType="string" resultType="com.ledao.entity.BookType">
+        select * from t_book_type where name=#{name}
+    </select>
+</mapper>

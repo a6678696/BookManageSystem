@@ -37,7 +37,7 @@ public class User {
      */
     private Integer state;
     /**
-     * 是否可借书
+     * 是否可借书,1代表是,2代表否
      */
     private Integer isBorrow;
 }
