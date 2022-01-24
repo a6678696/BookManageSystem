@@ -23,11 +23,15 @@ public class BorrowRecord {
      */
     private Date time;
     /**
+     * 归还时间
+     */
+    private Date returnTime;
+    /**
      * 借阅天数
      */
     private Integer day;
     /**
-     * 当前状态,1代表第一次借阅,2代表续借,3代表已还书
+     * 当前状态,1代表第一次借阅,2代表`续借`,3代表已还书
      */
     private Integer state;
     /**
@@ -38,4 +42,8 @@ public class BorrowRecord {
      * 图书id
      */
     private Integer bookId;
+    /**
+     * 图书名称，用于模糊搜索
+     */
+    private String bookName;
 }

@@ -69,4 +69,12 @@ public interface BookService {
      * @return
      */
     Book findByBookNumber(String bookNumber);
+
+    /**
+     * 根据书名模糊查询图书获取id集合
+     *
+     * @param name
+     * @return
+     */
+    List<Integer> selectIdByNameLike(String name);
 }

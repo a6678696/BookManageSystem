@@ -21,6 +21,12 @@
             <if test="userId != null">
                 and userId = #{userId}
             </if>
+            <if test="idList != null">
+                and bookId in
+                <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
         </where>
         <if test="start != null and size != null">
             limit #{start},#{size}
@@ -36,6 +42,12 @@
             </if>
             <if test="userId != null">
                 and userId = #{userId}
+            </if>
+            <if test="idList != null">
+                and bookId in
+                <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
             </if>
         </where>
     </select>

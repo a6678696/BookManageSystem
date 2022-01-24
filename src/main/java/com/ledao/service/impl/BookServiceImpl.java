@@ -56,4 +56,9 @@ public class BookServiceImpl implements BookService {
     public Book findByBookNumber(String bookNumber) {
         return bookMapper.findByBookNumber(bookNumber);
     }
+
+    @Override
+    public List<Integer> selectIdByNameLike(String name) {
+        return bookMapper.selectIdByNameLike(name);
+    }
 }

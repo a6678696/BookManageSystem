@@ -93,4 +93,8 @@
     <select id="findByBookNumber" parameterType="string" resultType="com.ledao.entity.Book">
         select * from t_book where bookNumber=#{bookNumber}
     </select>
+
+    <select id="selectIdByNameLike" parameterType="string" resultType="integer">
+        SELECT id FROM t_book t WHERE t.`name` LIKE #{name};
+    </select>
 </mapper>

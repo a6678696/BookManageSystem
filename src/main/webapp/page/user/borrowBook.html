@@ -74,7 +74,7 @@
                         $("#dlg").dialog("close");
                         $("#day").combobox("setValue", "");
                     } else {
-                        $.messager.alert("系统提示", "借书失败！");
+                        $.messager.alert("系统提示", result.errorInfo);
                     }
                 }
             })

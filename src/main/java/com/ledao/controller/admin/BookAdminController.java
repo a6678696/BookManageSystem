@@ -49,6 +49,7 @@ public class BookAdminController {
         Map<String, Object> resultMap = new HashMap<>(16);
         Map<String, Object> map = new HashMap<>(16);
         map.put("name", StringUtil.formatLike(book.getName()));
+        map.put("bookNumber", StringUtil.formatLike(book.getBookNumber()));
         map.put("bookTypeId", book.getBookTypeId());
         map.put("state", book.getState());
         map.put("start", pageBean.getStart());
@@ -137,6 +138,11 @@ public class BookAdminController {
     public Map<String, Object> borrowBook(HttpSession session, Integer bookId, Integer day) {
         User currentUser = (User) session.getAttribute("currentUser");
         Map<String, Object> resultMap = new HashMap<>(16);
+        if (currentUser == null) {
+            resultMap.put("success", false);
+            resultMap.put("errorInfo", "借书失败，你的登录状态已过期，请刷新页面后重新登录再借书！！");
+            return resultMap;
+        }
         BorrowRecord borrowRecord = new BorrowRecord();
         borrowRecord.setUserId(currentUser.getId());
         borrowRecord.setBookId(bookId);
@@ -146,6 +152,7 @@ public class BookAdminController {
             resultMap.put("success", true);
         } else {
             resultMap.put("success", false);
+            resultMap.put("errorInfo", "借书失败！！");
         }
         Book book = bookService.findById(bookId);
         book.setState(2);

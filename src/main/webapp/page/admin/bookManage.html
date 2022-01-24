@@ -16,13 +16,15 @@
             $("#dg").datagrid('load', {
                 "name": $("#s_name").val(),
                 "bookTypeId": $("#s_bookTypeId").val(),
-                "state": $("#s_state").val()
+                "state": $("#s_state").val(),
+                "bookNumber": $("#s_bookNumber").val()
             });
         }
 
         function resetValue() {
 
             $("#s_name").val("");
+            $("#s_bookNumber").val("");
             $("#s_bookTypeId").combobox("setValue", "");
             $("#s_state").combobox("setValue", "");
             $("#bookTypeId").combobox("setValue", "");
@@ -152,6 +154,7 @@
     </div>
     <div>
         &nbsp;图书名称：&nbsp;<input type="text" id="s_name" size="20" onkeydown="if(event.keyCode==13) searchBook()"/>
+        &nbsp;书号：&nbsp;<input type="text" id="s_bookNumber" size="20" onkeydown="if(event.keyCode==13) searchBook()"/>
         &nbsp;图书类型:&nbsp;<input class="easyui-combobox" id="s_bookTypeId" style="width: 140px" editable="false"
                                 data-options="valueField:'id',textField:'name',url:'/admin/bookType/comboList'"/>
         &nbsp;图书状态:&nbsp;
