@@ -1,16 +1,16 @@
 package com.ledao.controller.admin;
 
-import com.ledao.entity.Book;
-import com.ledao.entity.BookType;
-import com.ledao.entity.PageBean;
+import com.ledao.entity.*;
 import com.ledao.service.BookService;
 import com.ledao.service.BookTypeService;
+import com.ledao.service.BorrowRecordService;
 import com.ledao.util.StringUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +31,9 @@ public class BookAdminController {
 
     @Resource
     private BookTypeService bookTypeService;
+
+    @Resource
+    private BorrowRecordService borrowRecordService;
 
     /**
      * 分页分条件查询图书
@@ -98,6 +101,12 @@ public class BookAdminController {
         return resultMap;
     }
 
+    /**
+     * 删除图书,可批量删除
+     *
+     * @param ids
+     * @return
+     */
     @RequestMapping("/delete")
     public Map<String, Object> delete(String ids) {
         Map<String, Object> resultMap = new HashMap<>(16);
@@ -114,6 +123,33 @@ public class BookAdminController {
         } else {
             resultMap.put("success", false);
         }
+        return resultMap;
+    }
+
+    /**
+     * 借书
+     *
+     * @param bookId
+     * @param day
+     * @return
+     */
+    @RequestMapping("/borrowBook")
+    public Map<String, Object> borrowBook(HttpSession session, Integer bookId, Integer day) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        Map<String, Object> resultMap = new HashMap<>(16);
+        BorrowRecord borrowRecord = new BorrowRecord();
+        borrowRecord.setUserId(currentUser.getId());
+        borrowRecord.setBookId(bookId);
+        borrowRecord.setDay(day);
+        int key = borrowRecordService.add(borrowRecord);
+        if (key > 0) {
+            resultMap.put("success", true);
+        } else {
+            resultMap.put("success", false);
+        }
+        Book book = bookService.findById(bookId);
+        book.setState(2);
+        bookService.update(book);
         return resultMap;
     }
 }

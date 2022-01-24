@@ -122,4 +122,23 @@ public class BookTypeAdminController {
         }
         return resultMap;
     }
+
+    /**
+     * 检查图书类别id是否存在
+     *
+     * @param bookTypeId
+     * @return
+     */
+    @RequestMapping("/checkBookTypeId")
+    public Map<String, Object> checkBookTypeId(@RequestParam(value = "bookTypeId", required = false) Integer bookTypeId) {
+        Map<String, Object> resultMap = new HashMap<>(16);
+        BookType bookType = bookTypeService.findById(bookTypeId);
+        if (bookType == null) {
+            resultMap.put("success", false);
+            resultMap.put("errorInfo", "你选择的图书类别不存在,请重新选择!!");
+        } else {
+            resultMap.put("success", true);
+        }
+        return resultMap;
+    }
 }

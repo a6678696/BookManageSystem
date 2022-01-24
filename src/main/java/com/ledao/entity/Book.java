@@ -37,7 +37,7 @@ public class Book {
      */
     private String bookNumber;
     /**
-     * 状态,1代表可借阅,2代表已借出
+     * 状态,1代表可借阅,2代表已借出,3代表不可借出(由管理员设置)
      */
     private Integer state;
     /**

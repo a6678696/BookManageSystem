@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>借书</title>
+    <title>图书管理</title>
     <link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.7.0/themes/metro-blue/easyui.css">
     <link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.7.0/themes/icon.css">
     <script type="text/javascript" src="/static/jquery-easyui-1.7.0/jquery.min.js"></script>
@@ -23,8 +23,13 @@
         function resetValue() {
 
             $("#s_name").val("");
-            $("#s_bookTypeId").combobox("setValue","");
-            $("#s_state").combobox("setValue","");
+            $("#s_bookTypeId").combobox("setValue", "");
+            $("#s_state").combobox("setValue", "");
+            $("#bookTypeId").combobox("setValue", "");
+            $("#name").val("");
+            $("#bookNumber").val("");
+            $("#location").val("");
+            $("#bookDescribe").val("");
         }
 
         function closeBookDialog() {
@@ -124,7 +129,7 @@
     </script>
 </head>
 <body style="margin: 1px">
-<table id="dg" title="借书" class="easyui-datagrid" striped="true"
+<table id="dg" title="图书管理" class="easyui-datagrid" striped="true"
        fitColumns="true" pagination="true" rownumbers="true"
        url="/admin/book/list" fit="true" toolbar="#tb">
     <thead>
@@ -140,14 +145,17 @@
 
 <div id="tb">
     <div>
-        <a href="javascript:borrowBook()" class="easyui-linkbutton" iconCls="icon-borrowBook" plain="true">借阅</a>
+        <a href="javascript:openBookAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
+        <a href="javascript:openBookModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit"
+           plain="true">修改</a>
+        <a href="javascript:deleteBook()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
     </div>
     <div>
         &nbsp;图书名称：&nbsp;<input type="text" id="s_name" size="20" onkeydown="if(event.keyCode==13) searchBook()"/>
-        &nbsp;图书类型:&nbsp;<input class="easyui-combobox" id="s_bookTypeId" style="width: 140px" editable="true"
-                                data-options="panelHeight:'auto',valueField:'id',textField:'name',url:'/admin/bookType/comboList'"/>
+        &nbsp;图书类型:&nbsp;<input class="easyui-combobox" id="s_bookTypeId" style="width: 140px" editable="false"
+                                data-options="valueField:'id',textField:'name',url:'/admin/bookType/comboList'"/>
         &nbsp;图书状态:&nbsp;
-        <select id="s_state" class="easyui-combobox" style="width:100px;" data-options="panelHeight:'auto'">
+        <select id="s_state" class="easyui-combobox" editable="false" style="width:100px;" data-options="panelHeight:'auto'">
             <option value="">请选择...</option>
             <option value="1">可借阅</option>
             <option value="2">已借出</option>
@@ -172,8 +180,8 @@
                 <td valign="top">图书类别:</td>
                 <td>
                     <input class="easyui-combobox" id="bookTypeId" name="bookTypeId" required="true"
-                           style="width: 400px" editable="true"
-                           data-options="panelHeight:'auto',valueField:'id',textField:'name',url:'/admin/bookType/comboList'"/>
+                           style="width: 400px" editable="false"
+                           data-options="valueField:'id',textField:'name',url:'/admin/bookType/comboList'"/>
                 </td>
             </tr>
             <tr>
