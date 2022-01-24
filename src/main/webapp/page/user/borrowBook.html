@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借书</title>
+    <link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.7.0/themes/metro-blue/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/static/jquery-easyui-1.7.0/themes/icon.css">
+    <script type="text/javascript" src="/static/jquery-easyui-1.7.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript">
+        var url;
+
+        function searchBook() {
+            $("#dg").datagrid('load', {
+                "name": $("#s_name").val(),
+                "bookTypeId": $("#s_bookTypeId").val(),
+                "state": $("#s_state").val()
+            });
+        }
+
+        function resetValue() {
+
+            $("#s_name").val("");
+            $("#s_bookTypeId").combobox("setValue", "");
+            $("#s_state").combobox("setValue", "");
+            $("#day").combobox("setValue", "");
+        }
+
+        function borrowBook() {
+            var selectedRows = $("#dg").datagrid("getSelections");
+            if (selectedRows.length == 0) {
+                $.messager.alert("系统提示", "请选择一本要借阅的图书！");
+                return;
+            }
+            var bookId = selectedRows[0].id;
+            var bookState = selectedRows[0].state;
+            if (bookState != 1) {
+                if (bookState == 2) {
+                    $.messager.alert("系统提示", "改图书不可借阅，因为该图书<span style='color: red'>已被其他用户借阅</span>！");
+                } else {
+                    $.messager.alert("系统提示", "改图书不可借阅，因为该图书<span style='color: red'>已经被管理员设置为不可借阅</span>！");
+                }
+                return;
+            }
+            $("#dlg").dialog("open").dialog("setTitle", "输入借书时间");
+            url = "/admin/book/borrowBook?bookId=" + bookId;
+        }
+
+        function closeDialog() {
+            $("#dlg").dialog("close");
+            $("#dg").datagrid("reload");
+            resetValue();
+        }
+
+        function submitDataBorrowBook() {
+            var day = $("#day").combobox("getValue");
+            if (day == null || day == "") {
+                $.messager.alert("系统提示", "请选择天数!");
+                return false;
+            }
+            url = url + "&day=" + day;
+            $("#fm").form("submit", {
+                url: url,
+                onSubmit: function () {
+                    return $(this).form("validate");
+                },
+                success: function (result) {
+                    var result = eval('(' + result + ')');
+                    if (result.success) {
+                        $.messager.alert("系统提示", "借书成功!");
+                        $("#dg").datagrid("reload");
+                        $("#dlg").dialog("close");
+                        $("#day").combobox("setValue", "");
+                    } else {
+                        $.messager.alert("系统提示", "借书失败！");
+                    }
+                }
+            })
+        }
+
+        function formatState(val, row) {
+            if (val == 1) {
+                return "<span style='color: #0c9076'>可借阅</span>";
+            } else if (val == 2) {
+                return "<span style='color: blueviolet'>已借出</span>";
+            } else {
+                return "<span style='color: red'>不可借阅</span>";
+            }
+        }
+
+        function formatName(val, row) {
+            if (val.length > 20) {
+                return val.substring(0, 20) + "...";
+            } else {
+                return val;
+            }
+        }
+    </script>
+</head>
+<body style="margin: 1px">
+<table id="dg" title="借书" class="easyui-datagrid" striped="true"
+       fitColumns="true" pagination="true" rownumbers="true" singleSelect="true"
+       url="/admin/book/list" fit="true" toolbar="#tb">
+    <thead>
+    <th field="cb" checkbox="true" align="center"></th>
+    <th field="id" width="20" align="center" hidden="hidden">编号</th>
+    <th field="name" width="70" align="center" formatter="formatName">名称</th>
+    <th field="bookTypeName" width="30" align="center">图书类别名称</th>
+    <th field="bookNumber" width="30" align="center">书号</th>
+    <th field="state" width="20" align="center" formatter="formatState">状态</th>
+    <th field="location" width="30" align="center">图书位置</th>
+    </thead>
+</table>
+
+<div id="tb">
+    <div>
+        <a href="javascript:borrowBook()" class="easyui-linkbutton" iconCls="icon-borrowBook" plain="true">借阅</a>
+    </div>
+    <div>
+        &nbsp;图书名称：&nbsp;<input type="text" id="s_name" size="20" onkeydown="if(event.keyCode==13) searchBook()"/>
+        &nbsp;图书类型:&nbsp;<input class="easyui-combobox" id="s_bookTypeId" style="width: 140px" editable="false"
+                                data-options="valueField:'id',textField:'name',url:'/admin/bookType/comboList'"/>
+        &nbsp;图书状态:&nbsp;
+        <select id="s_state" class="easyui-combobox" editable="false" style="width:100px;" data-options="panelHeight:'auto'">
+            <option value="">请选择...</option>
+            <option value="1">可借阅</option>
+            <option value="2">已借出</option>
+            <option value="3">不可借阅</option>
+        </select>
+        <a href="javascript:searchBook()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
+        <a href="javascript:resetValue()" class="easyui-linkbutton" iconCls="icon-reset" plain="true">重置</a>
+    </div>
+</div>
+<div id="dlg" class="easyui-dialog" style="width: 320px;height: 158px;padding: 10px 20px"
+     closed="true" buttons="#dlg-buttons" data-options="onClose:function(){resetValue()}">
+    <form id="fm" method="post">
+        <table cellspacing="8px">
+            <tr>
+                <td valign="top">借阅时间（天）:</td>
+                <td>
+                    <select id="day" name="day" class="easyui-combobox" style="width:120px;" required="required"
+                            data-options="panelHeight:'auto'">
+                        <option value="">请选择...</option>
+                        <option value="7">7</option>
+                        <option value="14">14</option>
+                        <option value="30">30</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<div id="dlg-buttons">
+    <a href="javascript:submitDataBorrowBook()" class="easyui-linkbutton" iconCls="icon-ok">确定</a>
+    <a href="javascript:closeDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+</div>
+</body>
+</html>

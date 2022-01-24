@@ -256,13 +256,13 @@
     <div>
         &nbsp;用户名：&nbsp;<input type="text" id="s_userName" size="20" onkeydown="if(event.keyCode==13) searchUser()"/>
         &nbsp;账号状态:&nbsp;
-        <select id="s_state" class="easyui-combobox" style="width:100px;" data-options="panelHeight:'auto'">
+        <select id="s_state" class="easyui-combobox" editable="false" style="width:100px;" data-options="panelHeight:'auto'">
             <option value="">请选择...</option>
             <option value="1">正常</option>
             <option value="12">封禁</option>
         </select>
         &nbsp;是否可借书:&nbsp;
-        <select id="s_isBorrow" class="easyui-combobox" style="width:100px;" data-options="panelHeight:'auto'">
+        <select id="s_isBorrow" class="easyui-combobox" editable="false" style="width:100px;" data-options="panelHeight:'auto'">
             <option value="">请选择...</option>
             <option value="1">是</option>
             <option value="2">否</option>
