@@ -223,3 +223,11 @@
 .icon-borrowBook {
     background: url('usericons/borrowBook.gif') no-repeat center center;
 }
+
+.icon-addBorrowDay {
+    background: url('usericons/addBorrowDay.gif') no-repeat center center;
+}
+
+.icon-returnBook {
+    background: url('usericons/returnBook.gif') no-repeat center center;
+}

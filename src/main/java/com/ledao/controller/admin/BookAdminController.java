@@ -159,4 +159,48 @@ public class BookAdminController {
         bookService.update(book);
         return resultMap;
     }
+
+    /**
+     * 续借,默认续借30天
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/addBorrowRecordDay")
+    public Map<String, Object> addBorrowRecordDay(Integer id) {
+        Map<String, Object> resultMap = new HashMap<>(16);
+        BorrowRecord borrowRecord = borrowRecordService.findById(id);
+        borrowRecord.setDay(borrowRecord.getDay() + 30);
+        int key = borrowRecordService.update(borrowRecord);
+        if (key > 0) {
+            resultMap.put("success", true);
+        } else {
+            resultMap.put("success", false);
+        }
+        return resultMap;
+    }
+
+    /**
+     * 归还
+     *
+     * @param id
+     * @param bookId
+     * @return
+     */
+    @RequestMapping("/returnBook")
+    public Map<String, Object> returnBook(Integer id, Integer bookId) {
+        Map<String, Object> resultMap = new HashMap<>(16);
+        Book book = bookService.findById(bookId);
+        book.setState(1);
+        bookService.update(book);
+        BorrowRecord borrowRecord = borrowRecordService.findById(id);
+        borrowRecord.setState(2);
+        int key = borrowRecordService.update(borrowRecord);
+        if (key > 0) {
+            resultMap.put("success", true);
+        } else {
+            resultMap.put("success", false);
+        }
+        return resultMap;
+    }
 }

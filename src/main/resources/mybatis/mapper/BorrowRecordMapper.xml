@@ -21,6 +21,9 @@
             <if test="userId != null">
                 and userId = #{userId}
             </if>
+            <if test="state != null">
+                and state = #{state}
+            </if>
             <if test="idList != null">
                 and bookId in
                 <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
@@ -28,6 +31,7 @@
                 </foreach>
             </if>
         </where>
+        order by time desc
         <if test="start != null and size != null">
             limit #{start},#{size}
         </if>
@@ -42,6 +46,9 @@
             </if>
             <if test="userId != null">
                 and userId = #{userId}
+            </if>
+            <if test="state != null">
+                and state = #{state}
             </if>
             <if test="idList != null">
                 and bookId in

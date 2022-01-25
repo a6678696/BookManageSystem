@@ -38,9 +38,9 @@
             var bookState = selectedRows[0].state;
             if (bookState != 1) {
                 if (bookState == 2) {
-                    $.messager.alert("系统提示", "改图书不可借阅，因为该图书<span style='color: red'>已被其他用户借阅</span>！");
+                    $.messager.alert("系统提示", "该图书不可借阅，因为该图书<span style='color: red'>已被其他用户借阅</span>！");
                 } else {
-                    $.messager.alert("系统提示", "改图书不可借阅，因为该图书<span style='color: red'>已经被管理员设置为不可借阅</span>！");
+                    $.messager.alert("系统提示", "该图书不可借阅，因为该图书<span style='color: red'>已经被管理员设置为不可借阅</span>！");
                 }
                 return;
             }

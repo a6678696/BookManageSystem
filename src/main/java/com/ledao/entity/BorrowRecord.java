@@ -31,7 +31,7 @@ public class BorrowRecord {
      */
     private Integer day;
     /**
-     * 当前状态,1代表第一次借阅,2代表`续借`,3代表已还书
+     * 当前状态,1代表正在借阅,2代表已还书,3代表逾期
      */
     private Integer state;
     /**
