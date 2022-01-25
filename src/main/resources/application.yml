@@ -12,7 +12,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_bookmanagesystem?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/db_bookmanagesystem?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
 
