@@ -231,3 +231,7 @@
 .icon-returnBook {
     background: url('usericons/returnBook.gif') no-repeat center center;
 }
+
+.icon-modifyPassword {
+    background: url('usericons/modifyPassword.gif') no-repeat center center;
+}

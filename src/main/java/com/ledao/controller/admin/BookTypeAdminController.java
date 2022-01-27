@@ -2,6 +2,7 @@ package com.ledao.controller.admin;
 
 import com.ledao.entity.BookType;
 import com.ledao.entity.PageBean;
+import com.ledao.service.BookService;
 import com.ledao.service.BookTypeService;
 import com.ledao.util.StringUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,9 @@ public class BookTypeAdminController {
 
     @Resource
     private BookTypeService bookTypeService;
+
+    @Resource
+    private BookService bookService;
 
     /**
      * 下拉框模糊查询
@@ -60,6 +64,9 @@ public class BookTypeAdminController {
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
         List<BookType> bookTypeList = bookTypeService.list(map);
+        for (BookType type : bookTypeList) {
+            type.setNum(bookService.getCountByBookTypeId(type.getId()));
+        }
         Long total = bookTypeService.getCount(map);
         resultMap.put("rows", bookTypeList);
         resultMap.put("total", total);

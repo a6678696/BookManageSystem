@@ -143,6 +143,11 @@ public class BookAdminController {
             resultMap.put("errorInfo", "借书失败，你的登录状态已过期，请刷新页面后重新登录再借书！！");
             return resultMap;
         }
+        if (currentUser.getIsBorrow() == 2) {
+            resultMap.put("success", false);
+            resultMap.put("errorInfo", "借书失败，你的借书状态为不可借书，请联系管理员！！");
+            return resultMap;
+        }
         BorrowRecord borrowRecord = new BorrowRecord();
         borrowRecord.setUserId(currentUser.getId());
         borrowRecord.setBookId(bookId);

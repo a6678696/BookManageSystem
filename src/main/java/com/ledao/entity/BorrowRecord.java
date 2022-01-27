@@ -39,6 +39,10 @@ public class BorrowRecord {
      */
     private Integer userId;
     /**
+     * 借书人用户名
+     */
+    private String userName;
+    /**
      * 图书id
      */
     private Integer bookId;

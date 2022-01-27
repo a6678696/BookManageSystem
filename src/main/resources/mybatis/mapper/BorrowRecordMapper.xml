@@ -24,9 +24,15 @@
             <if test="state != null">
                 and state = #{state}
             </if>
-            <if test="idList != null">
+            <if test="idListBook != null">
                 and bookId in
-                <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+                <foreach item="item" index="index" collection="idListBook" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="idListUser != null">
+                and userId in
+                <foreach item="item" index="index" collection="idListUser" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>
@@ -50,9 +56,15 @@
             <if test="state != null">
                 and state = #{state}
             </if>
-            <if test="idList != null">
+            <if test="idListBook != null">
                 and bookId in
-                <foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+                <foreach item="item" index="index" collection="idListBook" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="idListUser != null">
+                and userId in
+                <foreach item="item" index="index" collection="idListUser" open="(" separator="," close=")">
                     #{item}
                 </foreach>
             </if>

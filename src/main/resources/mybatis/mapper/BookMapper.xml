@@ -97,4 +97,8 @@
     <select id="selectIdByNameLike" parameterType="string" resultType="integer">
         SELECT id FROM t_book t WHERE t.`name` LIKE #{name};
     </select>
+
+    <select id="getCountByBookTypeId" parameterType="integer" resultType="integer">
+        select count(*) from t_book where bookTypeId=#{bookTypeId}
+    </select>
 </mapper>

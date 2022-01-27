@@ -56,4 +56,9 @@ public class UserServiceImpl implements UserService {
     public int deleteById(Integer id) {
         return userMapper.deleteById(id);
     }
+
+    @Override
+    public List<Integer> selectIdByUserNameLike(String userName) {
+        return userMapper.selectIdByUserNameLike(userName);
+    }
 }

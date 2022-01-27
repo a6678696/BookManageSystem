@@ -94,4 +94,10 @@
         from t_user
         where id = #{id}
     </delete>
+
+    <select id="selectIdByUserNameLike" parameterType="string" resultType="integer">
+        select id
+        from t_user
+        where userName like #{userName};
+    </select>
 </mapper>

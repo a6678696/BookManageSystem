@@ -77,4 +77,12 @@ public interface BookMapper {
      * @return
      */
     List<Integer> selectIdByNameLike(String name);
+
+    /**
+     * 获取某个图书类别的图书数量
+     *
+     * @param bookTypeId
+     * @return
+     */
+    Integer getCountByBookTypeId(Integer bookTypeId);
 }

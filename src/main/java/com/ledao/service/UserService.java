@@ -69,4 +69,12 @@ public interface UserService {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 根据用户名模糊查询用户获取id集合
+     *
+     * @param userName
+     * @return
+     */
+    List<Integer> selectIdByUserNameLike(String userName);
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,6 +128,20 @@ public class UserAdminController {
         user.setIsBorrow(isBorrow);
         userService.update(user);
         resultMap.put("success", true);
+        return resultMap;
+    }
+
+    @RequestMapping("/modifyPassword")
+    public Map<String, Object> modifyPassword(String newPassword, HttpSession session) {
+        Map<String, Object> resultMap = new HashMap<>(16);
+        User currentUser = (User) session.getAttribute("currentUser");
+        if (currentUser == null) {
+            resultMap.put("success", false);
+        } else {
+            currentUser.setPassword(newPassword);
+            userService.update(currentUser);
+            resultMap.put("success", true);
+        }
         return resultMap;
     }
 }

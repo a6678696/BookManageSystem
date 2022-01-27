@@ -20,4 +20,8 @@ public class BookType {
      * 名称
      */
     private String name;
+    /**
+     * 图书数量
+     */
+    private Integer num;
 }

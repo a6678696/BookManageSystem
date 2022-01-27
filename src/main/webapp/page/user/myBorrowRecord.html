@@ -54,7 +54,7 @@
         function formatState(val, row) {
             if (val == 1) {
                 return "<span style='color: #0000FF'>正在借阅</span>";
-            }  else if (val == 2) {
+            } else if (val == 2) {
                 return "<span style='color: #0c9076'>已还书</span>";
             } else {
                 return "<span style='color: red'>逾期</span>";
@@ -105,8 +105,9 @@
             var id = selectedRows[0].id;
             var bookId = selectedRows[0].bookId;
             var state = selectedRows[0].state;
-            if (state != 1 && state != 3) {
-                $.messager.alert("系统提示", "该图书不可归还，只有正在借阅和逾期的图书才可以归还！");
+            if (state == 2) {
+                $.messager.alert("系统提示", "该图书已经归还，不可以重复归还！");
+                return;
             }
             $.messager.confirm("系统提示", "您确定要归还吗?", function (r) {
                 if (r) {
@@ -134,7 +135,7 @@
     <th field="cb" checkbox="true" align="center"></th>
     <th field="id" width="20" align="center" hidden="hidden">编号</th>
     <th field="time" width="20" align="center" formatter="formatTime">借书时间</th>
-    <th field="returnTime" width="20" align="center" formatter="formatTime">还书时间</th>
+    <th field="returnTime" width="20" align="center" formatter="formatTime">最晚还书时间</th>
     <th field="bookName" width="50" align="center">书名</th>
     <th field="day" width="15" align="center">借阅时间（天）</th>
     <th field="state" width="20" align="center" formatter="formatState">当前状态</th>
