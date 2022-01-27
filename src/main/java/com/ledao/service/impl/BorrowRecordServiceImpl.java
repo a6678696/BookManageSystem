@@ -51,4 +51,9 @@ public class BorrowRecordServiceImpl implements BorrowRecordService {
     public int deleteById(Integer id) {
         return borrowRecordMapper.deleteById(id);
     }
+
+    @Override
+    public List<BorrowRecord> getBorrowRecordListOverdue() {
+        return borrowRecordMapper.getBorrowRecordListOverdue();
+    }
 }

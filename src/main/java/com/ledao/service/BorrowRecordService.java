@@ -61,4 +61,11 @@ public interface BorrowRecordService {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 获取用户当前已经逾期的正在借阅的记录
+     *
+     * @return
+     */
+    List<BorrowRecord> getBorrowRecordListOverdue();
 }

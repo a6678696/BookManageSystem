@@ -100,4 +100,10 @@
         from t_borrow_record
         where id = #{id}
     </delete>
+
+    <select id="getBorrowRecordListOverdue" resultMap="BorrowRecordResult">
+        SELECT *
+        FROM t_borrow_record t
+        WHERE (SELECT TIMESTAMPDIFF(SECOND, NOW(), ADDDATE(t.`time`, INTERVAL t.`day` DAY)))&lt;=0 AND state=1;
+    </select>
 </mapper>
