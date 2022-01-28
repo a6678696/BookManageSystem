@@ -5,6 +5,7 @@ import com.ledao.service.BookService;
 import com.ledao.service.BookTypeService;
 import com.ledao.service.BorrowRecordService;
 import com.ledao.util.StringUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,9 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin/book")
 public class BookAdminController {
+
+    @Value("${maxBorrowBookSize}")
+    private Integer maxBorrowBookSize;
 
     @Resource
     private BookService bookService;
@@ -146,6 +150,24 @@ public class BookAdminController {
         if (currentUser.getIsBorrow() == 2) {
             resultMap.put("success", false);
             resultMap.put("errorInfo", "借书失败，你的借书状态为不可借书，请联系管理员！！");
+            return resultMap;
+        }
+        Map<String, Object> map = new HashMap<>(16);
+        map.put("userId", currentUser.getId());
+        map.put("state", 3);
+        //获取逾期的借阅记录集合
+        List<BorrowRecord> borrowRecordList = borrowRecordService.list(map);
+        if (borrowRecordList.size() > 0) {
+            resultMap.put("success", false);
+            resultMap.put("errorInfo", "借书失败，你借阅的图书已逾期，请归还后再借阅图书！！");
+            return resultMap;
+        }
+        map.put("state", 1);
+        //获取正在借阅的借阅记录集合
+        List<BorrowRecord> borrowRecordList2 = borrowRecordService.list(map);
+        if (borrowRecordList2.size() == maxBorrowBookSize) {
+            resultMap.put("success", false);
+            resultMap.put("errorInfo", "借书失败，你同时借阅的图书过多，每次最多同时借阅" + maxBorrowBookSize + "本图书！！");
             return resultMap;
         }
         BorrowRecord borrowRecord = new BorrowRecord();
