@@ -115,9 +115,11 @@
 
         function formatState(val, row) {
             if (val == 1) {
-                return "<span style='color: blue'>可借阅</span>";
+                return "<span style='color: #0c9076'>可借阅</span>";
+            } else if (val == 2) {
+                return "<span style='color: blue'>已借出</span>";
             } else {
-                return "<span style='color: red'>已借出</span>";
+                return "<span style='color: red'>不可借阅</span>";
             }
         }
 
@@ -126,6 +128,47 @@
                 return val.substring(0, 20) + "...";
             } else {
                 return val;
+            }
+        }
+
+        function setBookCanBorrowOrNot() {
+            var selectedRows = $("#dg").datagrid("getSelections");
+            if (selectedRows.length != 1) {
+                $.messager.alert("系统提示", "请选择一本图书！");
+                return;
+            }
+            var id = selectedRows[0].id;
+            var state = selectedRows[0].state;
+            if (state == 2) {
+                $.messager.alert("系统提示", "无法设置已经被借阅的图书！");
+                return;
+            }
+            if (state == 1) {
+                $.messager.confirm("系统提示", "您确定要将这本图书的状态设置为<span style='color: red'>不可借阅</span>吗?", function (r) {
+                    if (r) {
+                        $.post("/admin/book/setBookCanBorrowOrNot", {bookId: id, state: 3}, function (result) {
+                            if (result.success) {
+                                $.messager.alert("系统提示", "设置成功！");
+                                $("#dg").datagrid("reload");
+                            } else {
+                                $.messager.alert("系统提示", "设置失败！");
+                            }
+                        }, "json");
+                    }
+                });
+            } else {
+                $.messager.confirm("系统提示", "您确定要将这本图书的状态设置为<span style='color: red'>可借阅</span>吗?", function (r) {
+                    if (r) {
+                        $.post("/admin/book/setBookCanBorrowOrNot", {bookId: id, state: 1}, function (result) {
+                            if (result.success) {
+                                $.messager.alert("系统提示", "设置成功！");
+                                $("#dg").datagrid("reload");
+                            } else {
+                                $.messager.alert("系统提示", "设置失败！");
+                            }
+                        }, "json");
+                    }
+                });
             }
         }
     </script>
@@ -151,6 +194,7 @@
         <a href="javascript:openBookModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit"
            plain="true">修改</a>
         <a href="javascript:deleteBook()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+        <a href="javascript:setBookCanBorrowOrNot()" class="easyui-linkbutton" iconCls="icon-prohibitBorrow" plain="true">不可借阅与否</a>
     </div>
     <div>
         &nbsp;图书名称：&nbsp;<input type="text" id="s_name" size="20" onkeydown="if(event.keyCode==13) searchBook()"/>

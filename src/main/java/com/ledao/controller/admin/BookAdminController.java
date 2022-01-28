@@ -230,4 +230,25 @@ public class BookAdminController {
         }
         return resultMap;
     }
+
+    /**
+     * 禁止图书被借出与否
+     *
+     * @param bookId
+     * @param state
+     * @return
+     */
+    @RequestMapping("/setBookCanBorrowOrNot")
+    public Map<String, Object> setBookCanBorrowOrNot(Integer bookId, Integer state) {
+        Map<String, Object> resultMap = new HashMap<>(16);
+        Book book = bookService.findById(bookId);
+        book.setState(state);
+        int key = bookService.update(book);
+        if (key > 0) {
+            resultMap.put("success", true);
+        } else {
+            resultMap.put("success", false);
+        }
+        return resultMap;
+    }
 }
