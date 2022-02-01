@@ -67,13 +67,13 @@ public class BorrowRecordAdminController {
             }
         }
         map.put("state", borrowRecord.getState());
-        List<Integer> idList;
+        List<Integer> idListBook;
         if (StringUtil.isNotEmpty(borrowRecord.getBookName())) {
-            idList = bookService.selectIdByNameLike(StringUtil.formatLike(borrowRecord.getBookName()));
-            if (idList.size() == 0) {
-                idList.add(-1);
+            idListBook = bookService.selectIdByNameLike(StringUtil.formatLike(borrowRecord.getBookName()));
+            if (idListBook.size() == 0) {
+                idListBook.add(-1);
             }
-            map.put("idList", idList);
+            map.put("idListBook", idListBook);
         }
         List<BorrowRecord> borrowRecordList = borrowRecordService.list(map);
         for (BorrowRecord record : borrowRecordList) {

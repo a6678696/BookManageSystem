@@ -165,7 +165,7 @@ public class BookAdminController {
         map.put("state", 1);
         //获取正在借阅的借阅记录集合
         List<BorrowRecord> borrowRecordList2 = borrowRecordService.list(map);
-        if (borrowRecordList2.size() == configProperties.getMaxBorrowBookSize()) {
+        if (borrowRecordList2.size() >= configProperties.getMaxBorrowBookSize()) {
             resultMap.put("success", false);
             resultMap.put("errorInfo", "借书失败，你同时借阅的图书过多，每次最多同时借阅" + configProperties.getMaxBorrowBookSize() + "本图书！！");
             return resultMap;
