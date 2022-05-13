@@ -74,7 +74,7 @@ GitHub地址：[https://github.com/a6678696/BookManageSystem](https://github.com
 
 ##### 查看用户的借阅记录
 
-![image-20220514004809716](https://image.zoutl.cn/hexo-blog/blogImage/image-20220514004809716.png)
+![image-20220514004809716](https://image.zoutl.cn/hexo-blog/blogImage/image-20220514004809716.png) 
 
 ##### 修改密码
 
