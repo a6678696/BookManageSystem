@@ -32,6 +32,7 @@
             $("#bookNumber").val("");
             $("#location").val("");
             $("#bookDescribe").val("");
+            $("#bookImage").val("");
         }
 
         function closeBookDialog() {
@@ -131,6 +132,11 @@
             }
         }
 
+        function formatImage(val, row) {
+            return "<img height=122 src='/static/images/bookImage/"+val+"'/>";
+        }
+
+
         function setBookCanBorrowOrNot() {
             var selectedRows = $("#dg").datagrid("getSelections");
             if (selectedRows.length != 1) {
@@ -180,6 +186,7 @@
     <thead>
     <th field="cb" checkbox="true" align="center"></th>
     <th field="id" width="20" align="center" hidden="hidden">编号</th>
+    <th field="imageName" width="40" align="center" formatter="formatImage">图片</th>
     <th field="name" width="70" align="center" formatter="formatName">名称</th>
     <th field="bookTypeName" width="30" align="center">图书类别名称</th>
     <th field="bookNumber" width="30" align="center">书号</th>
@@ -215,12 +222,18 @@
 
 <div id="dlg" class="easyui-dialog" style="width: 620px;height: 400px;padding: 10px 20px"
      closed="true" buttons="#dlg-buttons" data-options="onClose:function(){resetValue()}">
-    <form id="fm" method="post">
+    <form id="fm" method="post" enctype="multipart/form-data">
         <table cellspacing="8px">
             <tr>
                 <td valign="top">名称:</td>
                 <td>
                     <input id="name" name="name" class="easyui-validatebox" required="true" style="width: 400px">
+                </td>
+            </tr>
+            <tr>
+                <td>图片：</td>
+                <td>
+                    <input type="file" id="bookImage" name="bookImage"/>
                 </td>
             </tr>
             <tr>

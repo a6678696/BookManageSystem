@@ -44,4 +44,8 @@ public class Book {
      * 图书位置
      */
     private String location;
+    /**
+     * 图片名称
+     */
+    private String imageName;
 }

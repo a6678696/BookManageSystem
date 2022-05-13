@@ -1,5 +1,6 @@
 package com.ledao.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -23,5 +24,11 @@ public class DateUtil {
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_YEAR, days);
         return calendar.getTime();
+    }
+
+    public static String getCurrentDateStr2() throws Exception {
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        return simpleDateFormat.format(date);
     }
 }

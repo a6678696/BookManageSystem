@@ -53,7 +53,7 @@
         </where>
     </select>
 
-    <insert id="add" parameterType="User">
+    <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into t_user (isBorrow, password, state, type, userName, nickName)
         values (1, #{password}, 1, 2, #{userName}, #{userName});
     </insert>

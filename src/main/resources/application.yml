@@ -7,6 +7,12 @@ server:
 
 # 数据源配置
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 10MB
+      max-request-size: 100MB
   application:
     name: microservice-student
   datasource:
@@ -25,4 +31,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+#用户可以借书的数量
 maxBorrowBookSize: 6
+#书籍图片存储地址
+bookImageFilePath: E://MyProject/IDEA/ActualCombat/BookManageSystem/src/main/webapp/static/images/bookImage/

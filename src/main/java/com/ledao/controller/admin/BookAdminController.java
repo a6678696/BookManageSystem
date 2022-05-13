@@ -5,13 +5,19 @@ import com.ledao.entity.*;
 import com.ledao.service.BookService;
 import com.ledao.service.BookTypeService;
 import com.ledao.service.BorrowRecordService;
+import com.ledao.service.UserService;
+import com.ledao.util.DateUtil;
 import com.ledao.util.StringUtil;
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +44,12 @@ public class BookAdminController {
 
     @Resource
     private BorrowRecordService borrowRecordService;
+
+    @Resource
+    private UserService userService;
+
+    @Value("${bookImageFilePath}")
+    private String bookImageFilePath;
 
     /**
      * 分页分条件查询图书
@@ -76,8 +88,23 @@ public class BookAdminController {
      * @return
      */
     @RequestMapping("/save")
-    public Map<String, Object> save(Book book) {
+    public Map<String, Object> save(Book book, @RequestParam("bookImage") MultipartFile file) throws Exception {
         Map<String, Object> resultMap = new HashMap<>(16);
+        //选择了图片
+        if (!file.isEmpty()) {
+            // 获取上传的文件名
+            String fileName = file.getOriginalFilename();
+            // 获取文件的后缀
+            String suffixName = fileName.substring(fileName.lastIndexOf("."));
+            //上传图片的新名称
+            String newFileName = DateUtil.getCurrentDateStr2() + suffixName;
+            FileUtils.copyInputStreamToFile(file.getInputStream(), new File(bookImageFilePath + newFileName));
+            //如果是修改,就删除原图
+            if (book.getId() != null) {
+                FileUtils.deleteQuietly(new File(bookImageFilePath + bookService.findById(book.getId()).getImageName()));
+            }
+            book.setImageName(newFileName);
+        }
         //key值用于判断是否添加或修改成功
         int key;
         Book book1 = bookService.findByBookNumber(book.getBookNumber());
@@ -147,7 +174,7 @@ public class BookAdminController {
             resultMap.put("errorInfo", "借书失败，你的登录状态已过期，请刷新页面后重新登录再借书！！");
             return resultMap;
         }
-        if (currentUser.getIsBorrow() == 2) {
+        if (userService.findById(currentUser.getId()).getIsBorrow() == 2) {
             resultMap.put("success", false);
             resultMap.put("errorInfo", "借书失败，你的借书状态为不可借书，请联系管理员！！");
             return resultMap;

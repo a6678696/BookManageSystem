@@ -36,11 +36,11 @@ GitHub地址：[https://github.com/a6678696/BookManageSystem](https://github.com
 
 ##### 借书
 
-![image-20220127214711878](https://image.zoutl.cn/hexo-blog/blogImage/image-20220127214711878.png)
+![image-20220514004613602](https://image.zoutl.cn/hexo-blog/blogImage/image-20220514004613602.png)
 
 ##### 查看借阅记录、续借和还书
 
-![image-20220127214801519](https://image.zoutl.cn/hexo-blog/blogImage/image-20220127214801519.png)
+![image-20220514004632978](https://image.zoutl.cn/hexo-blog/blogImage/image-20220514004632978.png)
 
 ##### 修改密码
 
@@ -66,11 +66,11 @@ GitHub地址：[https://github.com/a6678696/BookManageSystem](https://github.com
 
 ##### 图书管理
 
-![image-20220127215147218](https://image.zoutl.cn/hexo-blog/blogImage/image-20220127215147218.png)
+![image-20220514004730482](https://image.zoutl.cn/hexo-blog/blogImage/image-20220514004730482.png)
 
 ##### 查看用户的借阅记录
 
-![image-20220127215209795](https://image.zoutl.cn/hexo-blog/blogImage/image-20220127215209795.png)
+![image-20220514004809716](https://image.zoutl.cn/hexo-blog/blogImage/image-20220514004809716.png)
 
 ##### 修改密码
 

@@ -1,15 +1,26 @@
 package com.ledao;
 
-import com.ledao.util.StringUtil;
+import com.ledao.entity.User;
+import com.ledao.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.annotation.Resource;
 
 @SpringBootTest
 class BookManageSystemApplicationTests {
 
-    @Test
-    void contextLoads() {
-        System.out.println(StringUtil.isNumber("11所示11"));
-    }
 
+    @Resource
+    private UserService userService;
+
+    @Test
+    public void addUser(){
+        User user = new User();
+        user.setUserName("tom");
+        user.setNickName("LeDao");
+        user.setPassword("123456");
+        userService.add(user);
+        System.out.println("自增的id为: "+user.getId());
+    }
 }

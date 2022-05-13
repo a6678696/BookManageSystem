@@ -9,6 +9,7 @@
         <result property="bookNumber" column="bookNumber"/>
         <result property="state" column="state"/>
         <result property="location" column="location"/>
+        <result property="imageName" column="imageName"/>
     </resultMap>
 
     <select id="list" parameterType="map" resultMap="BookResult">
@@ -53,8 +54,8 @@
     </select>
 
     <insert id="add">
-        insert into t_book (name, bookDescribe, bookTypeId, bookNumber, state, location)
-        values (#{name}, #{bookDescribe}, #{bookTypeId}, #{bookNumber}, 1, #{location});
+        insert into t_book (name, bookDescribe, bookTypeId, bookNumber, state, location, imageName)
+        values (#{name}, #{bookDescribe}, #{bookTypeId}, #{bookNumber}, 1, #{location}, #{imageName});
     </insert>
 
     <update id="update">
@@ -78,27 +79,40 @@
             <if test="location != null and location != ''">
                 location=#{location},
             </if>
+            <if test="imageName != null and imageName != ''">
+                imageName=#{imageName},
+            </if>
         </set>
         where id = #{id}
     </update>
 
     <select id="findById" parameterType="integer" resultType="com.ledao.entity.Book">
-        select * from t_book where id=#{id}
+        select *
+        from t_book
+        where id = #{id}
     </select>
 
     <delete id="deleteById" parameterType="integer">
-        delete from t_book where id=#{id}
+        delete
+        from t_book
+        where id = #{id}
     </delete>
 
     <select id="findByBookNumber" parameterType="string" resultType="com.ledao.entity.Book">
-        select * from t_book where bookNumber=#{bookNumber}
+        select *
+        from t_book
+        where bookNumber = #{bookNumber}
     </select>
 
     <select id="selectIdByNameLike" parameterType="string" resultType="integer">
-        SELECT id FROM t_book t WHERE t.`name` LIKE #{name};
+        SELECT id
+        FROM t_book t
+        WHERE t.`name` LIKE #{name};
     </select>
 
     <select id="getCountByBookTypeId" parameterType="integer" resultType="integer">
-        select count(*) from t_book where bookTypeId=#{bookTypeId}
+        select count(*)
+        from t_book
+        where bookTypeId = #{bookTypeId}
     </select>
 </mapper>

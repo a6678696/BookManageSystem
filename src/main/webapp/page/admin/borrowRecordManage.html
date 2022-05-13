@@ -61,6 +61,10 @@
                 return "<span style='color: red'>逾期</span>";
             }
         }
+
+        function formatImage(val, row) {
+            return "<img height=66 src='/static/images/bookImage/"+val+"'/>";
+        }
     </script>
 </head>
 <body style="margin: 1px">
@@ -70,12 +74,13 @@
     <thead>
     <th field="cb" checkbox="true" align="center"></th>
     <th field="id" width="20" align="center" hidden="hidden">编号</th>
-    <th field="userName" width="20" align="center">用户名</th>
+    <th field="imageName" width="15" align="center" formatter="formatImage">图片</th>
+    <th field="bookName" width="44" align="center">书名</th>
+    <th field="userName" width="16" align="center">借阅人用户名</th>
+    <th field="state" width="15" align="center" formatter="formatState">当前状态</th>
+    <th field="day" width="15" align="center">借阅时间（天）</th>
     <th field="time" width="20" align="center" formatter="formatTime">借书时间</th>
     <th field="returnTime" width="20" align="center" formatter="formatTime">还书时间</th>
-    <th field="bookName" width="50" align="center">书名</th>
-    <th field="day" width="15" align="center">借阅时间（天）</th>
-    <th field="state" width="20" align="center" formatter="formatState">当前状态</th>
     </thead>
 </table>
 

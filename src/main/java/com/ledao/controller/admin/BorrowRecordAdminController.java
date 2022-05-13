@@ -1,5 +1,6 @@
 package com.ledao.controller.admin;
 
+import com.ledao.entity.Book;
 import com.ledao.entity.BorrowRecord;
 import com.ledao.entity.PageBean;
 import com.ledao.entity.User;
@@ -77,8 +78,10 @@ public class BorrowRecordAdminController {
         }
         List<BorrowRecord> borrowRecordList = borrowRecordService.list(map);
         for (BorrowRecord record : borrowRecordList) {
-            record.setBookName(bookService.findById(record.getBookId()).getName());
+            Book book = bookService.findById(record.getBookId());
+            record.setBookName(book.getName());
             record.setReturnTime(DateUtil.dateAddDays(record.getTime(), record.getDay()));
+            record.setImageName(book.getImageName());
         }
         Long total = borrowRecordService.getCount(map);
         resultMap.put("rows", borrowRecordList);
@@ -120,7 +123,9 @@ public class BorrowRecordAdminController {
         }
         List<BorrowRecord> borrowRecordList = borrowRecordService.list(map);
         for (BorrowRecord record : borrowRecordList) {
-            record.setBookName(bookService.findById(record.getBookId()).getName());
+            Book book = bookService.findById(record.getBookId());
+            record.setBookName(book.getName());
+            record.setImageName(book.getImageName());
             record.setReturnTime(DateUtil.dateAddDays(record.getTime(), record.getDay()));
             record.setUserName(userService.findById(record.getUserId()).getUserName());
         }

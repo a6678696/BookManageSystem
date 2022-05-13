@@ -50,4 +50,8 @@ public class BorrowRecord {
      * 图书名称，用于模糊搜索
      */
     private String bookName;
+    /**
+     * 借阅的书籍图片
+     */
+    private String imageName;
 }

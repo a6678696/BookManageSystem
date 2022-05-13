@@ -97,6 +97,10 @@
                 return val;
             }
         }
+
+        function formatImage(val, row) {
+            return "<img height=122 src='/static/images/bookImage/"+val+"'/>";
+        }
     </script>
 </head>
 <body style="margin: 1px">
@@ -106,6 +110,7 @@
     <thead>
     <th field="cb" checkbox="true" align="center"></th>
     <th field="id" width="20" align="center" hidden="hidden">编号</th>
+    <th field="imageName" width="40" align="center" formatter="formatImage">图片</th>
     <th field="name" width="70" align="center" formatter="formatName">名称</th>
     <th field="bookTypeName" width="30" align="center">图书类别名称</th>
     <th field="bookNumber" width="30" align="center">书号</th>
