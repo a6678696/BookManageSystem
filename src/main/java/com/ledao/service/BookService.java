@@ -85,4 +85,12 @@ public interface BookService {
      * @return
      */
     Integer getCountByBookTypeId(Integer bookTypeId);
+
+    /**
+     * 根据书名查找
+     *
+     * @param name
+     * @return
+     */
+    List<Book> findListByName(String name);
 }

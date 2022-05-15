@@ -30,13 +30,13 @@ CREATE TABLE `t_book` (
   `location` varchar(100) DEFAULT NULL COMMENT '图书位置',
   `imageName` varchar(100) DEFAULT NULL COMMENT '图片名称',
   PRIMARY KEY (`id`),
-  KEY `bookTypeId` (`bookTypeId`),
-  CONSTRAINT `t_book_ibfk_1` FOREIGN KEY (`bookTypeId`) REFERENCES `t_book_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  KEY `t_book_ibfk_1` (`bookTypeId`),
+  CONSTRAINT `t_book_ibfk_1` FOREIGN KEY (`bookTypeId`) REFERENCES `t_book_type` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_book` */
 
-insert  into `t_book`(`id`,`name`,`bookDescribe`,`bookTypeId`,`bookNumber`,`state`,`location`,`imageName`) values (1,'Java编程思想第8版','Java编程思想第8版',1,'1',1,'一楼3排','20220514001235.jpg'),(2,'Java编程思想第8版','Java编程思想第8版',1,'2',1,'一楼3排','20220514001239.jpg'),(4,'Java编程思想第8版','Java编程思想第8版',1,'3',1,'一楼3排','20220514001247.jpg'),(5,'C程序设计(第四版) 谭浩强','C程序设计(第四版) 谭浩强',1,'4',1,'一楼4排','20220514001256.jpg'),(6,'C程序设计(第四版) 谭浩强','C程序设计(第四版) 谭浩强',1,'5',1,'一楼4排','20220514001300.jpg'),(7,'C程序设计(第四版) 谭浩强','C程序设计(第四版) 谭浩强',1,'6',1,'一楼4排','20220514001304.jpg'),(8,'平凡的世界','平凡的世界',6,'7',1,'二楼1排','20220514001311.png'),(9,'平凡的世界','平凡的世界',6,'8',1,'二楼1排','20220514001315.png'),(10,'平凡的世界','平凡的世界',6,'9',1,'二楼1排','20220514001321.png'),(11,'MySQL必知必会','MySQL必知必会',1,'10',1,'一楼4排','20220514001416.jpg'),(12,'MySQL必知必会','MySQL必知必会',1,'11',1,'一楼4排','20220514001407.jpg'),(13,'MySQL必知必会','MySQL必知必会',1,'12',1,'一楼4排','20220514001403.jpg'),(14,'二战简史','二战简史',5,'13',1,'二楼1排','20220514001333.jpg'),(15,'二战简史','二战简史',5,'14',1,'二楼1排','20220514001337.jpg');
+insert  into `t_book`(`id`,`name`,`bookDescribe`,`bookTypeId`,`bookNumber`,`state`,`location`,`imageName`) values (1,'Java编程思想第8版','Java编程思想第8版',1,'a1',1,'一楼3排','20220516022412.jpg'),(2,'Java编程思想第8版','Java编程思想第8版',1,'a2',1,'一楼3排','20220516021620.jpg'),(4,'Java编程思想第8版','Java编程思想第8版',1,'a3',1,'一楼3排','20220516021620.jpg'),(5,'C程序设计(第四版) 谭浩强','C程序设计(第四版) 谭浩强',1,'b1',1,'一楼4排','20220515205633.jpg'),(6,'C程序设计(第四版) 谭浩强','C程序设计(第四版) 谭浩强',1,'b2',1,'一楼4排','20220515205633.jpg'),(7,'C程序设计(第四版) 谭浩强','C程序设计(第四版) 谭浩强',1,'b3',1,'一楼4排','20220515205633.jpg'),(8,'平凡的世界','平凡的世界',6,'c1',1,'二楼1排','20220515205640.png'),(9,'平凡的世界','平凡的世界',6,'c2',1,'二楼1排','20220515205640.png'),(10,'平凡的世界','平凡的世界',6,'c3',1,'二楼1排','20220515205640.png'),(11,'MySQL必知必会','MySQL必知必会',1,'d3',1,'一楼4排','20220515205646.jpg'),(12,'MySQL必知必会','MySQL必知必会',1,'d2',1,'一楼4排','20220515205646.jpg'),(13,'MySQL必知必会','MySQL必知必会',1,'d1',1,'一楼4排','20220515205646.jpg'),(14,'二战简史','二战简史',5,'e1',1,'二楼1排','20220515205652.jpg'),(15,'二战简史','二战简史',5,'e2',1,'二楼1排','20220515205652.jpg'),(16,'Java编程思想第8版','Java编程思想第8版',1,'a4',1,'一楼3排','20220516021620.jpg'),(17,'Java编程思想第8版','Java编程思想第8版',1,'a5',1,'一楼3排','20220516021620.jpg');
 
 /*Table structure for table `t_book_type` */
 
@@ -64,10 +64,10 @@ CREATE TABLE `t_borrow_record` (
   `userId` int(11) DEFAULT NULL COMMENT '借书人id',
   `bookId` int(11) DEFAULT NULL COMMENT 'bookId',
   PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
-  KEY `bookId` (`bookId`),
-  CONSTRAINT `t_borrow_record_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `t_user` (`id`),
-  CONSTRAINT `t_borrow_record_ibfk_2` FOREIGN KEY (`bookId`) REFERENCES `t_book` (`id`)
+  KEY `t_borrow_record_ibfk_2` (`bookId`),
+  KEY `t_borrow_record_ibfk_1` (`userId`),
+  CONSTRAINT `t_borrow_record_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `t_user` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `t_borrow_record_ibfk_2` FOREIGN KEY (`bookId`) REFERENCES `t_book` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 /*Data for the table `t_borrow_record` */

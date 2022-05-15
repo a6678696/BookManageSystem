@@ -19,6 +19,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -99,24 +100,44 @@ public class BookAdminController {
             //上传图片的新名称
             String newFileName = DateUtil.getCurrentDateStr2() + suffixName;
             FileUtils.copyInputStreamToFile(file.getInputStream(), new File(bookImageFilePath + newFileName));
-            //如果是修改,就删除原图
-            if (book.getId() != null) {
-                FileUtils.deleteQuietly(new File(bookImageFilePath + bookService.findById(book.getId()).getImageName()));
-            }
             book.setImageName(newFileName);
+            //找出同名的书
+            List<Book> bookList = bookService.findListByName(book.getName());
+            if (bookList.size() > 0) {
+                Iterator<Book> bookIterator = bookList.iterator();
+                //由于MySQL默认是大小写不敏感的("Java"和"java"是一样的),把不是真正同名的书籍移除
+                while (bookIterator.hasNext()) {
+                    Book book1 = bookIterator.next();
+                    if (!book.getName().equals(book1.getName())) {
+                        bookIterator.remove();
+                    } else {//同名的书的图片也一样
+                        book1.setImageName(newFileName);
+                        bookService.update(book1);
+                    }
+                }
+            }
         }
         //key值用于判断是否添加或修改成功
         int key;
         Book book1 = bookService.findByBookNumber(book.getBookNumber());
+        //添加
         if (book.getId() == null) {
             if (book1 != null && book1.getBookNumber().equals(book.getBookNumber())) {
                 resultMap.put("success", false);
                 resultMap.put("errorInfo", "书号为" + book.getBookNumber() + "的图书已经存在,请重新输入!!");
                 return resultMap;
             } else {
+                List<Book> bookList = bookService.findListByName(book.getName());
+                for (Book book2 : bookList) {
+                    //同名的书籍已经存在就使用其引用的图片
+                    if (book.getName().equals(book2.getName())) {
+                        book.setImageName(book2.getImageName());
+                        break;
+                    }
+                }
                 key = bookService.add(book);
             }
-        } else {
+        } else {//修改
             if (book1 != null && book1.getBookNumber().equals(book.getBookNumber()) && !book1.getId().equals(book.getId())) {
                 resultMap.put("success", false);
                 resultMap.put("errorInfo", "书号为" + book.getBookNumber() + "的图书已经存在,请重新输入!!");

@@ -66,4 +66,9 @@ public class BookServiceImpl implements BookService {
     public Integer getCountByBookTypeId(Integer bookTypeId) {
         return bookMapper.getCountByBookTypeId(bookTypeId);
     }
+
+    @Override
+    public List<Book> findListByName(String name) {
+        return bookMapper.findListByName(name);
+    }
 }

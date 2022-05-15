@@ -29,6 +29,7 @@
                 and bookNumber like #{bookNumber}
             </if>
         </where>
+        order by bookNumber asc
         <if test="start != null and size != null">
             limit #{start},#{size}
         </if>
@@ -114,5 +115,17 @@
         select count(*)
         from t_book
         where bookTypeId = #{bookTypeId}
+    </select>
+
+    <select id="findListByName" parameterType="string" resultMap="BookResult">
+        select *
+        from t_book t
+        where t.name = #{name}
+    </select>
+
+    <select id="findListByImageName" parameterType="string" resultMap="BookResult">
+        select *
+        from t_book t
+        where t.imageName = #{imageName}
     </select>
 </mapper>
