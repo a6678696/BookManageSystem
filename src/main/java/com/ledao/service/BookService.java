@@ -93,4 +93,11 @@ public interface BookService {
      * @return
      */
     List<Book> findListByName(String name);
+
+    /**
+     * 查找所有正在使用的图片
+     *
+     * @return
+     */
+    List<String> findAllUseImage();
 }

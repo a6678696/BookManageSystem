@@ -71,4 +71,9 @@ public class BookServiceImpl implements BookService {
     public List<Book> findListByName(String name) {
         return bookMapper.findListByName(name);
     }
+
+    @Override
+    public List<String> findAllUseImage() {
+        return bookMapper.findAllUseImage();
+    }
 }

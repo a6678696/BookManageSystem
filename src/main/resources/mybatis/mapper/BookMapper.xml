@@ -128,4 +128,8 @@
         from t_book t
         where t.imageName = #{imageName}
     </select>
+
+    <select id="findAllUseImage" resultType="java.lang.String">
+        SELECT DISTINCT imageName FROM t_book;
+    </select>
 </mapper>

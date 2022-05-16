@@ -101,4 +101,11 @@ public interface BookMapper {
      * @return
      */
     List<Book> findListByImageName(String imageName);
+
+    /**
+     * 查找所有正在使用的图片
+     *
+     * @return
+     */
+    List<String> findAllUseImage();
 }
