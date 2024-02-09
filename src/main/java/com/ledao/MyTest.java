@@ -1,8 +1,8 @@
 package com.ledao;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
 
 /**
  * @author LeDao
@@ -12,11 +12,7 @@ import java.util.GregorianCalendar;
 public class MyTest {
 
     public static void main(String[] args) {
-        Date date = new Date();
-        System.out.println(date);
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        System.out.println(calendar.getTime());
+        File file = new File("E://data//a.txt");
+        FileUtils.deleteQuietly(file);
     }
 }

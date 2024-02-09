@@ -1,59 +1,28 @@
 package com.ledao;
 
-import com.ledao.entity.User;
+import com.ledao.entity.Book;
 import com.ledao.service.BookService;
-import com.ledao.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
+@Slf4j
 @SpringBootTest
 class BookManageSystemApplicationTests {
-
     @Resource
     private BookService bookService;
 
-    @Value("${bookImageFilePath}")
-    private String bookImageFilePath;
-
     @Test
     public void test() {
-        List<String> allUseImageList = bookService.findAllUseImage();
-        for (String s : allUseImageList) {
-            System.out.println(s);
+        Book book = bookService.findById(1000);
+        if (book == null) {
+            log.info("图书不存在");
+            System.out.println("图书不存在");
         }
-    }
-
-    @Test
-    public void test2() {
-        System.out.println("-----------------");
-        List<String> allUseImageList = bookService.findAllUseImage();
-        for (String s : allUseImageList) {
-            System.out.println(s);
-        }
-        System.out.println(allUseImageList.size());
-        System.out.println("-----------------");
-        File file = new File(bookImageFilePath);
-        File[] files = file.listFiles();
-        List<String> allImageList = new ArrayList<>();
-        for (File file1 : files) {
-            allImageList.add(file1.getName());
-        }
-        for (String s : allImageList) {
-            System.out.println(s);
-        }
-        System.out.println(allImageList.size());
-        System.out.println("-----------------");
-        allImageList.removeAll(allUseImageList);
-        for (String s : allImageList) {
-            System.out.println(s);
-        }
-        System.out.println(allImageList.size());
-        System.out.println("-----------------");
+        System.out.println(book);
     }
 }
